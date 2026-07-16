@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv \"제목 없음-12.png\" hero.png)",
+      "Bash(mv \"대지 1_3x.png\" thumb.png)",
+      "Bash(mv day_front_F.png gallery_01.png)",
+      "Bash(mv night_front_F.png gallery_02.png)",
+      "Bash(mv Package.png gallery_03.png)",
+      "Bash(awk 'NR==135,NR==907' js/script.js)",
+      "Bash(python3)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL available'\\)\")",
+      "Bash(python3 -c \"import sys; print\\(sys.version\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL OK', Image.__version__ if hasattr\\(Image,'__version__'\\) else 'ok'\\)\")",
+      "Bash(gh auth *)"
+    ]
+  }
+}

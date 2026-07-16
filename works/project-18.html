@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="meta.title">eunsumoon.com</title>
+<meta name="description" content="Visual Communication Designer">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="eunsumoon.com">
+<meta property="og:description" content="Visual Communication Designer">
+<meta property="og:image" content="https://eunsumoon.com/icons/og-image.png">
+<meta property="og:url" content="https://eunsumoon.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="eunsumoon.com">
+<meta name="twitter:description" content="Visual Communication Designer">
+<meta name="twitter:image" content="https://eunsumoon.com/icons/og-image.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16.png">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+<script>window.SITE_BASE = "../";</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-col">
+    <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18"><line x1="1" y1="4" x2="17" y2="4" stroke="currentColor" stroke-width="1.6"/><line x1="1" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="1" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+    <nav class="main-nav" id="mainNav">
+      <a href="../about/" data-i18n="nav.about">About</a>
+      <a href="../works/" data-i18n="nav.works">Works</a>
+      <a href="../contact/" data-i18n="nav.contact">Contact</a>
+    </nav>
+  </div>
+
+  <a href="../index.html" class="brand-swap" id="brandSwap" aria-label="Home">
+    <span class="brand-welcome" data-i18n="brand.welcome">eunsumoon.com에 오신 것을 환영합니다</span>
+    <span class="brand-logo"><svg width="64" height="20" viewBox="0 0 109.14 33.92" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor">
+        <polygon points="30.04 30.96 0 30.96 2.96 33.92 33 33.92 30.04 30.96"/>
+        <polygon points="33 3.88 33 33.92 30.04 30.96 30.04 .92 33 3.88"/>
+        <path d="M63.54.92c2.68,3.23,4.3,7.38,4.3,11.9,0,10.3-8.35,18.65-18.65,18.65-4.53,0-8.67-1.61-11.9-4.3,3.42,4.12,8.58,6.74,14.35,6.74,10.3,0,18.65-8.35,18.65-18.65,0-5.77-2.62-10.93-6.74-14.35Z"/>
+        <polygon points="90.2 .92 88.77 0 106.48 30.96 70.28 30.96 73.24 33.92 109.14 33.92 90.2 .92"/>
+      </g>
+    </svg></span>
+  </a>
+
+  <div class="header-tools">
+    <div class="search-inline" id="searchInline">
+      <span class="search-trigger" id="searchTrigger" data-i18n="search.trigger">Search</span>
+      <input type="text" id="searchInput" class="search-input-inline" hidden>
+      <ul class="search-dropdown" id="searchResults" hidden></ul>
+    </div>
+
+    <div class="lang-switch" role="group" aria-label="Language switch">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn is-active" data-lang="ko">KR</button>
+      <button class="lang-btn" data-lang="ja">JP</button>
+    </div>
+  </div>
+</header>
+
+<main id="top" data-work-id="18">
+
+  <section class="work-detail" style="border-top:none;">
+    <a href="./" class="back-link" data-i18n="work.back">← 작업물 목록으로</a>
+
+    <div class="work-detail-hero" id="wdHero"></div>
+
+    <div class="work-detail-top">
+      <div class="work-detail-thumb" id="wdThumb"></div>
+
+      <div class="work-detail-info">
+        <div class="work-detail-head">
+          <span class="work-detail-no" id="wdNo"></span>
+          <h1 class="work-detail-title" id="wdTitle"></h1>
+          <span class="work-detail-tag" id="wdTag"></span>
+        </div>
+        <p id="wdDesc"></p>
+        <div class="work-award" id="wdAward" hidden>
+          <p class="work-award-label" data-i18n="work.awardlabel">수상</p>
+          <p class="work-award-text" id="wdAwardText"></p>
+        </div>
+        <ul class="work-detail-meta">
+          <li><span data-i18n="work.rolelabel">역할</span><strong id="wdRole"></strong></li>
+          <li id="metaClient"><span data-i18n="work.clientlabel">클라이언트</span><strong id="wdClient"></strong></li>
+          <li><span data-i18n="work.contributionlabel">기여도</span><strong id="wdContribution"></strong></li>
+          <li class="meta-wide"><span data-i18n="work.responsibilitieslabel">담당 업무</span><ul class="responsibilities-list" id="wdResponsibilities"></ul></li>
+          <li><span data-i18n="work.yearlabel">연도</span><strong id="wdYear"></strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="work-gallery" id="wdGallery"></div>
+
+    <div class="work-detail-secondary" id="wdSecondary" hidden>
+      <div class="work-detail-hero" id="wdHero2"></div>
+
+      <div class="work-detail-top">
+        <div class="work-detail-thumb" id="wdThumb2"></div>
+
+        <div class="work-detail-info">
+          <div class="work-detail-head">
+            <h2 class="work-detail-title" id="wdTitle2"></h2>
+            <span class="work-detail-tag" id="wdTag2"></span>
+          </div>
+          <p id="wdDesc2"></p>
+          <ul class="work-detail-meta">
+            <li><span data-i18n="work.rolelabel">역할</span><strong id="wdRole2"></strong></li>
+            <li id="metaClient2"><span data-i18n="work.clientlabel">클라이언트</span><strong id="wdClient2"></strong></li>
+            <li><span data-i18n="work.contributionlabel">기여도</span><strong id="wdContribution2"></strong></li>
+            <li class="meta-wide"><span data-i18n="work.responsibilitieslabel">담당 업무</span><ul class="responsibilities-list" id="wdResponsibilities2"></ul></li>
+            <li><span data-i18n="work.yearlabel">연도</span><strong id="wdYear2"></strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="work-gallery" id="wdGallery2"></div>
+    </div>
+
+    <div class="lightbox-overlay" id="lightboxOverlay" hidden>
+      <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <div class="work-detail-nav">
+      <a id="wdPrev" class="work-detail-link">← <span data-i18n="work.prev">이전 작업</span></a>
+      <a id="wdNext" class="work-detail-link"><span data-i18n="work.next">다음 작업</span> →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span><span id="footerYear">2026</span> © Eunsu Moon</span>
+  <a href="../cookie-policy/" class="footer-cookie-link" data-i18n="footer.cookiepolicy">쿠키 정책</a>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-info">
+    <p data-i18n="cookie.text">이 사이트는 더 나은 경험 제공을 위해 쿠키를 사용합니다. 계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다.</p>
+    <a href="../cookie-policy/" class="cookie-policy-link" data-i18n="cookie.viewpolicy">쿠키 정책 보기</a>
+  </div>
+  <div class="cookie-actions">
+    <button id="cookieDecline" class="cookie-btn ghost" data-i18n="cookie.decline">거부</button>
+    <button id="cookieAccept" class="cookie-btn" data-i18n="cookie.accept">동의</button>
+  </div>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
