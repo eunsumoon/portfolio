@@ -1597,37 +1597,3 @@ initCookieBanner();
   });
 })();
 
-/* =========================================================
-   CV 다운로드 버튼 - 언어 상관없이 좌우 폭 통일
-   (영어/한국어/일본어 텍스트 길이가 달라도 같은 크기로,
-   줄바꿈 없이 한 줄로 보이도록 자연 폭을 측정해 맞춰줌)
-   ========================================================= */
-(function () {
-  const buttons = document.querySelectorAll(".cv-download-grid .cv-btn");
-  if (!buttons.length) return;
-
-  function equalizeWidths() {
-    const isMobile = window.matchMedia("(max-width: 760px)").matches;
-    if (isMobile) {
-      // 모바일에서는 버튼이 컨테이너 폭에 꽉 차야 하므로(CSS width:100%),
-      // 인라인 폭 지정을 지워 CSS가 그대로 적용되게 둠
-      buttons.forEach((btn) => { btn.style.width = ""; });
-      return;
-    }
-    buttons.forEach((btn) => { btn.style.width = "auto"; });
-    let maxWidth = 0;
-    buttons.forEach((btn) => {
-      const w = btn.getBoundingClientRect().width;
-      if (w > maxWidth) maxWidth = w;
-    });
-    if (maxWidth > 0) {
-      buttons.forEach((btn) => { btn.style.width = Math.ceil(maxWidth) + "px"; });
-    }
-  }
-
-  equalizeWidths();
-  window.addEventListener("resize", equalizeWidths);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(equalizeWidths);
-  }
-})();
