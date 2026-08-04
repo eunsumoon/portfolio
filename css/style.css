@@ -1364,9 +1364,9 @@ section {
   .cv-warning { display: none; }
 }
 @media (max-width: 760px) {
-  .cv-download-grid { flex-direction: column; align-items: center; gap: 16px; width: 100%; }
-  .cv-download-item { width: 100%; max-width: 320px; }
-  .cv-btn { width: 100%; }
+  .cv-download-grid { flex-direction: column; align-items: stretch; gap: 16px; width: 100%; }
+  .cv-download-item { width: 100%; }
+  .cv-btn { width: 100%; box-sizing: border-box; }
 }
 @media (max-width: 760px) {
   .cv-section .section-label { top: 40px; }

@@ -1607,6 +1607,13 @@ initCookieBanner();
   if (!buttons.length) return;
 
   function equalizeWidths() {
+    const isMobile = window.matchMedia("(max-width: 760px)").matches;
+    if (isMobile) {
+      // 모바일에서는 버튼이 컨테이너 폭에 꽉 차야 하므로(CSS width:100%),
+      // 인라인 폭 지정을 지워 CSS가 그대로 적용되게 둠
+      buttons.forEach((btn) => { btn.style.width = ""; });
+      return;
+    }
     buttons.forEach((btn) => { btn.style.width = "auto"; });
     let maxWidth = 0;
     buttons.forEach((btn) => {
