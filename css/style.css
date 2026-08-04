@@ -1259,6 +1259,13 @@ section {
 /* =========================================================
    CV 다운로드 페이지 전용 (cv/index.html)
    ========================================================= */
+.cv-section {
+  min-height: calc(100dvh - var(--header-h));
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .cv-content {
   max-width: 640px;
   margin: 0 auto;
