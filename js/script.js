@@ -1506,3 +1506,87 @@ applyLanguage(currentLang);
 highlightActiveNav();
 updateHeaderScrollState();
 initCookieBanner();
+
+/* =========================================================
+   CV 다운로드 페이지 전용 (cv/index.html)
+   - 데스크톱(hover 가능): 버튼 hover 시 경고 문구 노출, 클릭하면 바로 다운로드
+   - 모바일/터치: 버튼 클릭 시 팝업으로 경고 문구 노출, 동의 클릭해야 다운로드
+   ========================================================= */
+(function () {
+  const grid = document.querySelector(".cv-download-grid");
+  if (!grid) return; // cv 페이지가 아니면 아무 것도 하지 않음
+
+  const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  if (!isTouch) return; // 데스크톱은 CSS hover 툴팁 + 기본 다운로드 동작 그대로 사용
+
+  const overlay = document.getElementById("cvModalOverlay");
+  const modalTitle = document.getElementById("cvModalTitle");
+  const modalText = document.getElementById("cvModalText");
+  const agreeBtn = document.getElementById("cvModalAgree");
+  const cancelBtn = document.getElementById("cvModalCancel");
+  if (!overlay || !agreeBtn || !cancelBtn) return;
+
+  const cvModalCopy = {
+    en: {
+      title: "Before you download",
+      body: "By downloading this file, you agree not to distribute or share it without permission.",
+      agree: "I Agree",
+      cancel: "Cancel",
+    },
+    ko: {
+      title: "다운로드 전 확인",
+      body: "다운로드 시, 허락 없이 이 파일을 배포하거나 공유하지 않는 것에 동의하는 것으로 간주됩니다.",
+      agree: "동의",
+      cancel: "취소",
+    },
+    ja: {
+      title: "ダウンロード前の確認",
+      body: "ダウンロードすると、許可なくこのファイルを配布・共有しないことに同意したものとみなされます。",
+      agree: "同意する",
+      cancel: "キャンセル",
+    },
+  };
+
+  let pendingHref = null;
+
+  function openModal(lang, href) {
+    const c = cvModalCopy[lang] || cvModalCopy.en;
+    modalTitle.textContent = c.title;
+    modalText.textContent = c.body;
+    agreeBtn.textContent = c.agree;
+    cancelBtn.textContent = c.cancel;
+    pendingHref = href;
+    overlay.hidden = false;
+    requestAnimationFrame(() => overlay.classList.add("is-visible"));
+  }
+
+  function closeModal() {
+    overlay.classList.remove("is-visible");
+    window.setTimeout(() => { overlay.hidden = true; }, 200);
+    pendingHref = null;
+  }
+
+  grid.querySelectorAll(".cv-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal(btn.getAttribute("data-lang"), btn.getAttribute("href"));
+    });
+  });
+
+  agreeBtn.addEventListener("click", () => {
+    if (pendingHref) {
+      const a = document.createElement("a");
+      a.href = pendingHref;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    closeModal();
+  });
+
+  cancelBtn.addEventListener("click", closeModal);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeModal();
+  });
+})();
