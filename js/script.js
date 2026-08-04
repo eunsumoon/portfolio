@@ -15,6 +15,7 @@ const BASE = window.SITE_BASE || "";
 const translations = {
   ko: {
     "meta.title": "eunsumoon.com",
+    "cv.lead": "언어를 선택해 이력서를 다운로드해주세요.",
     "nav.about": "소개",
     "nav.works": "작업",
     "nav.contact": "연락처",
@@ -63,6 +64,7 @@ const translations = {
   },
   en: {
     "meta.title": "eunsumoon.com",
+    "cv.lead": "Select a language below to download the CV.",
     "nav.about": "About",
     "nav.works": "Works",
     "nav.contact": "Contact",
@@ -111,6 +113,7 @@ const translations = {
   },
   ja: {
     "meta.title": "eunsumoon.com",
+    "cv.lead": "言語を選択して履歴書をダウンロードしてください。",
     "nav.about": "プロフィール",
     "nav.works": "作品",
     "nav.contact": "お問い合わせ",

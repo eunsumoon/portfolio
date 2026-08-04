@@ -1259,30 +1259,46 @@ section {
 /* =========================================================
    CV 다운로드 페이지 전용 (cv/index.html)
    ========================================================= */
+.cv-content {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cv-content .section-label {
+  justify-content: center;
+}
+.cv-lead {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin: 0 0 40px;
+}
 .cv-download-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 32px 20px;
-  margin-top: 8px;
 }
 .cv-download-item {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 .cv-btn {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 12px 20px;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 160px;
+  box-sizing: border-box;
+  padding: 16px 28px;
+  border-radius: 10px;
   border: 1px solid var(--line);
   background: var(--gray-1);
   color: var(--ink);
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 .cv-btn:hover {
@@ -1290,12 +1306,24 @@ section {
   border-color: var(--accent);
   color: var(--accent);
 }
+.cv-btn-lang {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: inherit;
+}
+.cv-btn-caption {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
 .cv-warning {
   position: absolute;
   top: calc(100% + 8px);
-  left: 0;
+  left: 50%;
   width: max-content;
-  max-width: 260px;
+  max-width: 240px;
   margin: 0;
   background: var(--gray-1);
   border: 1px solid var(--line);
@@ -1304,18 +1332,24 @@ section {
   font-size: 12px;
   line-height: 1.6;
   color: var(--ink-soft);
+  text-align: left;
   box-shadow: 0 6px 20px rgba(34, 34, 34, 0.08);
   opacity: 0;
-  transform: translateY(-4px);
+  transform: translate(-50%, -4px);
   pointer-events: none;
   transition: opacity 0.15s ease, transform 0.15s ease;
   z-index: 20;
 }
 @media (hover: hover) and (pointer: fine) {
-  .cv-download-item:hover .cv-warning { opacity: 1; transform: translateY(0); }
+  .cv-download-item:hover .cv-warning { opacity: 1; transform: translate(-50%, 0); }
 }
 @media (hover: none), (pointer: coarse) {
   .cv-warning { display: none; }
+}
+@media (max-width: 760px) {
+  .cv-download-grid { flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+  .cv-download-item { width: 100%; max-width: 320px; }
+  .cv-btn { width: 100%; }
 }
 .cv-modal-overlay {
   position: fixed;
