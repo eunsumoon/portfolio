@@ -1278,7 +1278,7 @@ section {
   margin-bottom: 0;
 }
 .cv-content {
-  max-width: 820px;
+  max-width: 920px;
   margin: 0 auto;
   text-align: center;
 }
@@ -1286,13 +1286,13 @@ section {
   font-size: 15px;
   line-height: 1.8;
   color: var(--ink-soft);
-  margin: 0 0 40px;
+  margin: 0 0 52px;
 }
 .cv-download-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 32px 20px;
+  gap: 40px 28px;
 }
 .cv-download-item {
   position: relative;
@@ -1304,36 +1304,55 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  min-width: 220px;
+  gap: 10px;
+  min-width: 260px;
   box-sizing: border-box;
-  padding: 26px 48px;
-  border-radius: 10px;
+  padding: 40px 60px;
+  border-radius: 14px;
   border: 1px solid var(--line);
   background: var(--gray-1);
   color: var(--ink);
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 .cv-btn:hover {
   background: var(--accent-soft);
   border-color: var(--accent);
   color: var(--accent);
+  transform: translateY(-2px);
+}
+.cv-btn-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--ink-soft);
+  transition: color 0.15s ease;
+}
+.cv-btn:hover .cv-btn-icon {
+  color: var(--accent);
 }
 .cv-btn-lang {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 600;
   color: inherit;
   white-space: nowrap;
 }
 .cv-btn-caption {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--ink-soft);
   white-space: nowrap;
+}
+.cv-btn-updated {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  opacity: 0.6;
+  white-space: nowrap;
+  margin-top: 2px;
 }
 .cv-warning {
   position: absolute;
@@ -1366,7 +1385,9 @@ section {
 @media (max-width: 760px) {
   .cv-download-grid { flex-direction: column; align-items: stretch; gap: 16px; width: 100%; }
   .cv-download-item { width: 100%; }
-  .cv-btn { width: 100%; box-sizing: border-box; }
+  .cv-btn { width: 100%; box-sizing: border-box; padding: 26px 32px; }
+  .cv-btn-icon { width: 22px; height: 22px; }
+  .cv-btn-lang { font-size: 17px; }
 }
 @media (max-width: 760px) {
   .cv-section .section-label { top: 40px; }
