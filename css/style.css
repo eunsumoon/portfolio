@@ -1390,7 +1390,20 @@ section {
   .cv-btn-lang { font-size: 17px; }
 }
 @media (max-width: 760px) {
-  .cv-section .section-label { top: 40px; }
+  .cv-section {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 90px;
+    padding-bottom: 60px;
+  }
+  .cv-section .section-label {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-bottom: 36px;
+  }
   html[lang="ja"] .cv-lead { letter-spacing: -0.04em; }
 }
 .cv-modal-overlay {
