@@ -1263,6 +1263,14 @@ section {
   min-height: calc(100dvh - var(--header-h));
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
+}
+.cv-section .section-label {
+  justify-content: center;
+}
+.cv-center {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -1270,9 +1278,6 @@ section {
   max-width: 640px;
   margin: 0 auto;
   text-align: center;
-}
-.cv-content .section-label {
-  justify-content: center;
 }
 .cv-lead {
   font-size: 15px;
