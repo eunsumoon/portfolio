@@ -1370,6 +1370,7 @@ section {
 }
 @media (max-width: 760px) {
   .cv-section .section-label { top: 40px; }
+  html[lang="ja"] .cv-lead { letter-spacing: -0.04em; }
 }
 .cv-modal-overlay {
   position: fixed;
