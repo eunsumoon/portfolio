@@ -1402,8 +1402,10 @@ section {
     top: auto;
     left: auto;
     right: auto;
+    width: 100%;
     margin-bottom: 36px;
   }
+  .cv-content { width: 100%; }
   html[lang="ja"] .cv-lead { letter-spacing: -0.04em; }
 }
 .cv-modal-overlay {
