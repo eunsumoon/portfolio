@@ -1291,7 +1291,7 @@ section {
 .cv-download-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: stretch;
   gap: 40px 28px;
   width: 100%;
@@ -1301,17 +1301,16 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1 1 0;
-  min-width: 220px;
+  flex: 0 0 auto;
 }
 .cv-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  width: 100%;
+  min-width: 260px;
   box-sizing: border-box;
-  padding: 52px 32px;
+  padding: 46px 60px;
   border-radius: 16px;
   border: 1px solid var(--line);
   background: var(--gray-1);
