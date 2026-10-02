@@ -1,15 +1,15 @@
 /* =========================================================
    admin/editors.js
-   편집 상태(S), 데이터 정규화, 작업물/About 편집 화면.
+   Edit state (S), data normalization, Works/About editors.
    ========================================================= */
 "use strict";
 (function (A) {
   const { h } = A;
   const LANGS = ["ko", "en", "ja"];
-  const LANG_NAME = { ko: "한국어", en: "English", ja: "日本語" };
-  const MAX_FILE = 50 * 1024 * 1024; // GitHub API 요청 크기 한도를 고려한 안전선
+  const LANG_NAME = { ko: "Korean", en: "English", ja: "Japanese" };
+  const MAX_FILE = 50 * 1024 * 1024; // safety limit considering GitHub API request size
 
-  /* ---------- 편집 상태 ---------- */
+  /* ---------- Edit state ---------- */
   const S = (A.S = {
     gh: null,
     tree: new Set(),
@@ -17,9 +17,9 @@
     site: { about: {} },
     origWorks: "",
     origSite: "",
-    files: new Map(), // 저장소 경로(원문) → { blob, url }  (게시 전 대기 중인 파일)
-    keep: new Map(), // 게시 완료됐지만 사이트 반영 전까지 미리보기용으로 들고 있는 파일
-    deletes: new Set(), // 게시 때 삭제할 저장소 경로
+    files: new Map(), // repo path (raw) -> { blob, url } (files waiting to be published)
+    keep: new Map(), // published, but kept for previews until the site updates
+    deletes: new Set(), // repo paths to delete on publish
     optimize: localStorage.getItem("adm_optimize") !== "0",
     onChange() {},
     stage(path, blob) {
@@ -35,7 +35,7 @@
       this.files.delete(path);
       this.onChange();
     },
-    /* 데이터에 적힌(인코딩된) 경로 → 화면에 보여줄 URL. 대기 중이면 임시 URL. */
+    /* Encoded path from the data -> URL to display. A temporary URL while pending. */
     urlFor(encPath) {
       const p = A.path.dec(encPath);
       const f = this.files.get(p) || this.keep.get(p);
@@ -48,7 +48,7 @@
     },
   });
 
-  /* ---------- 알림(toast) ---------- */
+  /* ---------- Toast ---------- */
   A.toast = function (msg, type) {
     let box = document.getElementById("toasts");
     if (!box) {
@@ -61,7 +61,7 @@
   };
 
   /* =========================================================
-     데이터 정규화
+     Data normalization
      ========================================================= */
   const emptyI18n = () => ({ ko: "", en: "", ja: "" });
   const emptyLines = () => ({ ko: [], en: [], ja: [] });
@@ -80,7 +80,7 @@
   const cleanI18n = (v) => { const o = {}; LANGS.forEach((l) => (o[l] = v && typeof v[l] === "string" ? v[l] : "")); return o; };
   const cleanLines = (v) => { const o = {}; LANGS.forEach((l) => (o[l] = ((v && v[l]) || []).map((s) => String(s).trim()).filter(Boolean))); return o; };
 
-  /* 저장된 데이터 → 편집용 객체 (갤러리 항목을 모두 { src, label... } 형태로) */
+  /* Stored data -> edit object (every gallery item as { src, label... }) */
   function toEdit(src) {
     const w = JSON.parse(JSON.stringify(src));
     w.year = String(w.year || "");
@@ -110,7 +110,7 @@
     return o;
   }
 
-  /* 편집용 객체 → 저장용 객체 (선택 항목이 비어 있으면 키 자체를 뺍니다) */
+  /* Edit object -> stored object (empty optional items are omitted) */
   function serializeWork(w, secondary) {
     const o = {};
     if (!secondary) o.id = w.id;
@@ -163,7 +163,7 @@
     return s;
   };
 
-  /* 작업물이 참조하는 모든 파일 경로(원문) */
+  /* Every file path (raw) referenced by the works */
   A.refsOf = function (works) {
     const set = new Set();
     const add = (p) => { if (p) set.add(A.path.dec(p)); };
@@ -178,7 +178,7 @@
   };
 
   /* =========================================================
-     언어 탭
+     Language tabs
      ========================================================= */
   function setLang(l) {
     document.documentElement.dataset.editLang = l;
@@ -191,13 +191,13 @@
     );
     return wrap;
   };
-  document.documentElement.dataset.editLang = "ko";
+  document.documentElement.dataset.editLang = "en";
 
   /* =========================================================
-     폼 부품
+     Form parts
      ========================================================= */
   const fieldRow = (label, control, hint) =>
-    h("div", { class: "f" }, h("label", { class: "f-label", text: label }), control, hint ? h("p", { class: "hint", text: hint }) : null);
+    h("div", { class: "f" }, h("label", { class: "f-label", text: label }), control, hint ? A.hint(hint) : null);
 
   const card = (title, ...kids) => h("section", { class: "card" }, h("h3", { text: title }), ...kids);
 
@@ -230,7 +230,7 @@
     LANGS.forEach((l) =>
       box.append(
         h("textarea", {
-          class: "in", rows: opt.rows || 5, dataset: { l }, value: v[l].join("\n"), placeholder: opt.placeholder || "한 줄에 하나씩",
+          class: "in", rows: opt.rows || 5, dataset: { l }, value: v[l].join("\n"), placeholder: opt.placeholder || "One per line",
           oninput: (e) => { v[l] = e.target.value.split("\n").map((s) => s.trim()).filter(Boolean); S.onChange(); },
         })
       )
@@ -239,13 +239,13 @@
   }
 
   /* =========================================================
-     파일 업로드 (게시 전까지는 브라우저에 임시 보관)
+     File upload (held in the browser until published)
      ========================================================= */
   async function stageUpload(file, folder, base) {
     const isImg = file.type.startsWith("image/");
     let blob = file, ext = A.path.ext(file.name) || "bin";
     if (isImg) ({ blob, ext } = await A.processImage(file, { webp: S.optimize, maxSide: 2400 }));
-    if (blob.size > MAX_FILE) throw new Error(`${file.name}: 파일이 너무 큽니다 (${A.fmtSize(blob.size)}). 50MB 이하로 줄여주세요.`);
+    if (blob.size > MAX_FILE) throw new Error(`${file.name}: file is too large (${A.fmtSize(blob.size)}). Keep it under 50 MB.`);
     const path = `${folder}/${base}-${A.stamp()}.${ext}`;
     S.stage(path, blob);
     return A.path.enc(path);
@@ -258,7 +258,7 @@
       : h("img", { src: url, loading: "lazy", alt: "" });
   }
 
-  /* 단일 이미지 칸 (썸네일/히어로 등) */
+  /* Single image field (thumbnail / hero etc.) */
   function imageField(label, obj, key, ctx, opt) {
     opt = opt || {};
     const box = h("div", { class: "img-field" });
@@ -280,14 +280,14 @@
         },
       });
       box.append(
-        h("div", { class: "img-prev" }, p ? mediaEl(p) : h("span", { class: "ph", text: "이미지 없음" })),
+        h("div", { class: "img-prev" }, p ? mediaEl(p) : h("span", { class: "ph", text: "No image" })),
         h("div", { class: "img-side" },
           h("strong", { text: label }),
-          opt.hint ? h("p", { class: "hint", text: opt.hint }) : null,
+          opt.hint ? A.hint(opt.hint) : null,
           h("code", { class: "path", text: p ? A.path.dec(p) : "—" }),
           h("div", { class: "btns" },
-            h("button", { type: "button", class: "btn sm", onclick: () => input.click(), text: p ? "교체" : "업로드" }),
-            opt.optional && p ? h("button", { type: "button", class: "btn sm ghost", text: "지우기", onclick: () => { obj[key] = ""; S.onChange(); render(); } }) : null,
+            h("button", { type: "button", class: "btn sm", onclick: () => input.click(), text: p ? "Replace" : "Upload" }),
+            opt.optional && p ? h("button", { type: "button", class: "btn sm ghost", text: "Remove", onclick: () => { obj[key] = ""; S.onChange(); render(); } }) : null,
             input
           )
         )
@@ -297,7 +297,7 @@
     return box;
   }
 
-  /* 갤러리 (이미지·영상 여러 개, 순서 변경, 캡션) */
+  /* Gallery (multiple images/videos, reordering, captions) */
   function galleryField(work, ctx) {
     const wrap = h("div", { class: "gallery-ed" });
     let dragIdx = null;
@@ -313,7 +313,7 @@
       let n = 0;
       for (const f of files) {
         n++;
-        status.textContent = `처리 중 ${n}/${files.length} …`;
+        status.textContent = `Processing ${n}/${files.length} …`;
         try {
           const src = await stageUpload(f, ctx.folder(), "gallery");
           list.push({ src });
@@ -334,26 +334,26 @@
     function slotCard(slot, i) {
       const list = work.gallery;
       const isVid = A.path.isVideo(slot.src);
-      const media = h("div", { class: "g-media", draggable: "true", title: "끌어서 순서 변경" }, slot.src ? mediaEl(slot.src) : h("span", { class: "ph", text: "비어 있음" }));
+      const media = h("div", { class: "g-media", draggable: "true", title: "Drag to reorder" }, slot.src ? mediaEl(slot.src) : h("span", { class: "ph", text: "Empty" }));
       media.addEventListener("dragstart", (e) => { dragIdx = i; e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", String(i)); });
       const capBox = h("div", { class: "g-cap", hidden: !slot._open });
       if (!slot.label) slot.label = emptyI18n();
       ensureI18n(slot, "label");
       capBox.append(
-        ...[i18nInput(slot, "label", { placeholder: "캡션 (선택)" }),
-        h("label", { class: "chk" }, h("input", { type: "checkbox", checked: !!slot.captionLight, onchange: (e) => { slot.captionLight = e.target.checked; S.onChange(); } }), " 캡션 글자색 밝게"),
+        ...[i18nInput(slot, "label", { placeholder: "Caption (optional)" }),
+        h("label", { class: "chk" }, h("input", { type: "checkbox", checked: !!slot.captionLight, onchange: (e) => { slot.captionLight = e.target.checked; S.onChange(); } }), " Light caption text"),
         isVid
-          ? h("label", { class: "chk" }, "영상 확대 ", h("input", { class: "in xs", type: "number", step: "0.05", min: "1", value: slot.videoZoom || "", placeholder: "1", oninput: (e) => { slot.videoZoom = e.target.value; S.onChange(); } }))
+          ? h("label", { class: "chk" }, "Video zoom ", h("input", { class: "in xs", type: "number", step: "0.05", min: "1", value: slot.videoZoom || "", placeholder: "1", oninput: (e) => { slot.videoZoom = e.target.value; S.onChange(); } }))
           : null].filter(Boolean)
       );
       const el = h("div", { class: "g-card" },
         h("span", { class: "g-no", text: String(i + 1) }),
         media,
         h("div", { class: "g-btns" },
-          h("button", { type: "button", class: "ic", title: "앞으로", text: "←", onclick: () => move(i, -1) }),
-          h("button", { type: "button", class: "ic", title: "뒤로", text: "→", onclick: () => move(i, 1) }),
-          h("button", { type: "button", class: "ic", title: "캡션", text: "Aa", onclick: () => { slot._open = !slot._open; capBox.hidden = !slot._open; } }),
-          h("button", { type: "button", class: "ic danger", title: "삭제", text: "✕", onclick: () => { list.splice(i, 1); S.onChange(); render(); } })
+          h("button", { type: "button", class: "ic", title: "Move earlier", text: "←", onclick: () => move(i, -1) }),
+          h("button", { type: "button", class: "ic", title: "Move later", text: "→", onclick: () => move(i, 1) }),
+          h("button", { type: "button", class: "ic", title: "Caption", text: "Aa", onclick: () => { slot._open = !slot._open; capBox.hidden = !slot._open; } }),
+          h("button", { type: "button", class: "ic danger", title: "Delete", text: "✕", onclick: () => { list.splice(i, 1); S.onChange(); render(); } })
         ),
         capBox
       );
@@ -376,9 +376,9 @@
       wrap.replaceChildren();
       const grid = h("div", { class: "g-grid" }, work.gallery.map(slotCard));
       const add = h("div", { class: "g-add" },
-        h("button", { type: "button", class: "btn", text: "＋ 이미지·영상 추가", onclick: () => fileInput.click() }),
+        h("button", { type: "button", class: "btn", text: "＋ Add images / videos", onclick: () => fileInput.click() }),
         status, fileInput,
-        h("span", { class: "hint", text: "여러 개를 한 번에 선택하거나 이 영역에 끌어다 놓을 수 있습니다." })
+        A.hint("Select several files at once, or drag them into this area.", "span")
       );
       wrap.append(grid, add);
     }
@@ -393,7 +393,7 @@
   }
 
   /* =========================================================
-     작업물 편집기
+     Work editor
      ========================================================= */
   function workFolder(w) {
     const cands = [w.image, w.hero, w.listThumb, (w.gallery[0] || {}).src];
@@ -408,22 +408,22 @@
   function basicCards(w, ctx, secondary) {
     const cards = [];
     cards.push(
-      card("기본 정보",
-        fieldRow("제목", i18nInput(w, "titles")),
-        fieldRow("분류 태그", i18nInput(w, "tags", { placeholder: "예: 브랜딩" })),
-        fieldRow("연도", textInput(w, "year", { placeholder: "2024" }))
+      card("Basic info",
+        fieldRow("Title", i18nInput(w, "titles")),
+        fieldRow("Category tag", i18nInput(w, "tags", { placeholder: "e.g. Branding" })),
+        fieldRow("Year", textInput(w, "year", { placeholder: "2024" }))
       ),
-      card("대표 이미지",
-        imageField("썸네일", w, "image", ctx, { base: "thumb", hint: "상세 페이지 상단 썸네일. 작업 목록에도 사용됩니다." }),
-        secondary ? null : imageField("목록 전용 썸네일", w, "listThumb", ctx, { base: "list", optional: true, hint: "선택. 비우면 위 썸네일을 목록에서도 사용합니다." }),
-        imageField("히어로 이미지", w, "hero", ctx, { base: "hero", hint: "상세 페이지 맨 위의 큰 이미지." })
+      card("Main images",
+        imageField("Thumbnail", w, "image", ctx, { base: "thumb", hint: "Thumbnail at the top of the detail page. Also used in the works list." }),
+        secondary ? null : imageField("List-only thumbnail", w, "listThumb", ctx, { base: "list", optional: true, hint: "Optional. If empty, the thumbnail above is used in the list too." }),
+        imageField("Hero image", w, "hero", ctx, { base: "hero", hint: "The large image at the very top of the detail page." })
       ),
-      card("설명", fieldRow("작업 설명", i18nInput(w, "descs", { multiline: true, rows: 10 }), "빈 줄로 문단을 나눕니다.")),
-      card("상세 정보",
-        fieldRow("역할", i18nInput(w, "role")),
-        fieldRow("클라이언트", i18nInput(w, "client"), "모든 언어를 비워두면 이 항목이 화면에서 숨겨집니다."),
-        fieldRow("기여도", i18nInput(w, "contribution", { placeholder: "예: 100%" })),
-        fieldRow("담당 업무", linesInput(w, "responsibilities"), "한 줄에 하나씩 입력합니다.")
+      card("Description", fieldRow("Project description", i18nInput(w, "descs", { multiline: true, rows: 10 }), "Separate paragraphs with a blank line.")),
+      card("Details",
+        fieldRow("Role", i18nInput(w, "role")),
+        fieldRow("Client", i18nInput(w, "client"), "If every language is empty, this item is hidden on the site."),
+        fieldRow("Contribution", i18nInput(w, "contribution", { placeholder: "e.g. 100%" })),
+        fieldRow("Responsibilities", linesInput(w, "responsibilities"), "Enter one per line.")
       )
     );
     return cards;
@@ -433,11 +433,11 @@
     const ctx = { folder: () => workFolder(w) };
     const root = h("div", { class: "editor" });
     const titleEl = h("h2", { class: "ed-title" });
-    const refreshTitle = () => { titleEl.textContent = w.titles.ko || w.titles.en || "새 작업"; };
+    const refreshTitle = () => { titleEl.textContent = w.titles.ko || w.titles.en || "New work"; };
     refreshTitle();
 
     const head = h("div", { class: "ed-head" },
-      h("button", { type: "button", class: "btn ghost", text: "← 목록으로", onclick: onBack }),
+      h("button", { type: "button", class: "btn ghost", text: "← Back to list", onclick: onBack }),
       h("div", { class: "ed-head-mid" }, h("span", { class: "no", text: "ID " + w.id }), titleEl),
       A.langTabs()
     );
@@ -445,32 +445,32 @@
 
     const optLabel = h("label", { class: "chk opt" },
       h("input", { type: "checkbox", checked: S.optimize, onchange: (e) => { S.optimize = e.target.checked; localStorage.setItem("adm_optimize", S.optimize ? "1" : "0"); } }),
-      " 업로드 시 PNG·JPG를 WebP로 변환하고 긴 변을 2400px로 줄이기 (권장, 용량 절약)"
+      " Convert PNG/JPG to WebP on upload and cap the long side at 2400px (recommended, saves space)"
     );
     root.append(optLabel);
 
     basicCards(w, ctx, false).forEach((c) => root.append(c));
 
     root.append(
-      card("추가 문구 (선택)",
-        fieldRow("수상", i18nInput(w, "award"), "비워두면 수상 항목이 숨겨집니다."),
-        fieldRow("참여 라벨 (예: 참여)", i18nInput(w.note, "label")),
-        fieldRow("참여 내용", i18nInput(w.note, "text"), "비워두면 이 항목이 숨겨집니다."),
-        fieldRow("저작권 표시 (이미지 위 배지)", textInput(w, "copyrightNotice", { placeholder: "예: © TV TOKYO" })),
-        fieldRow("하단 고지문", i18nInput(w, "disclaimer", { multiline: true, rows: 3 }))
+      card("Extra text (optional)",
+        fieldRow("Award", i18nInput(w, "award"), "If empty, the award item is hidden."),
+        fieldRow("Credit label (e.g. Participation)", i18nInput(w.note, "label")),
+        fieldRow("Credit text", i18nInput(w.note, "text"), "If empty, this item is hidden."),
+        fieldRow("Copyright badge (shown over the image)", textInput(w, "copyrightNotice", { placeholder: "e.g. © TV TOKYO" })),
+        fieldRow("Footer disclaimer", i18nInput(w, "disclaimer", { multiline: true, rows: 3 }))
       ),
-      card("갤러리", galleryField(w, ctx))
+      card("Gallery", galleryField(w, ctx))
     );
 
-    /* 보조 작업(같은 페이지의 두 번째 섹션) */
+    /* Secondary work (a second section on the same page) */
     const secWrap = h("div", { class: "secondary" });
     let stash = w.secondary || null;
     const renderSecondary = () => {
       secWrap.replaceChildren();
       if (!w.secondary) return;
-      secWrap.append(h("h3", { class: "sec-title", text: "보조 작업" }));
+      secWrap.append(h("h3", { class: "sec-title", text: "Secondary work" }));
       basicCards(w.secondary, ctx, true).forEach((c) => secWrap.append(c));
-      secWrap.append(card("보조 작업 갤러리", galleryField(w.secondary, ctx)));
+      secWrap.append(card("Secondary work gallery", galleryField(w.secondary, ctx)));
     };
     const secToggle = h("label", { class: "chk" },
       h("input", {
@@ -482,9 +482,9 @@
           S.onChange(); renderSecondary();
         },
       }),
-      " 이 페이지에 보조 작업 섹션 추가 (한 페이지에 두 번째 작업을 이어서 보여줍니다)"
+      " Add a secondary work section to this page (shows a second project below the first)"
     );
-    root.append(h("section", { class: "card" }, h("h3", { text: "보조 작업 (선택)" }), secToggle), secWrap);
+    root.append(h("section", { class: "card" }, h("h3", { text: "Secondary work (optional)" }), secToggle), secWrap);
     renderSecondary();
 
     root.addEventListener("input", refreshTitle);
@@ -492,33 +492,33 @@
   };
 
   /* =========================================================
-     About 편집기
+     About editor
      ========================================================= */
   A.buildAboutEditor = function (site) {
     const a = site.about;
     const root = h("div", { class: "editor" });
     root.append(
       h("div", { class: "ed-head" },
-        h("div", { class: "ed-head-mid" }, h("h2", { class: "ed-title", text: "About 소개" })),
+        h("div", { class: "ed-head-mid" }, h("h2", { class: "ed-title", text: "About" })),
         A.langTabs()
       ),
-      card("소개",
-        fieldRow("직함", i18nInput(a, "role")),
-        fieldRow("이름", i18nInput(a, "name")),
-        fieldRow("소개 문구", i18nInput(a, "statement", { multiline: true, rows: 5 }))
+      card("Intro",
+        fieldRow("Title", i18nInput(a, "role")),
+        fieldRow("Name", i18nInput(a, "name")),
+        fieldRow("Statement", i18nInput(a, "statement", { multiline: true, rows: 5 }))
       ),
-      card("항목 목록",
-        fieldRow("작업 분야", linesInput(a, "practice"), "한 줄에 하나씩"),
-        fieldRow("협업 가능 분야", linesInput(a, "available")),
-        fieldRow("언어", linesInput(a, "languages"))
+      card("Lists",
+        fieldRow("Practice", linesInput(a, "practice"), "One per line"),
+        fieldRow("Available for", linesInput(a, "available")),
+        fieldRow("Languages", linesInput(a, "languages"))
       )
     );
 
     const tools = h("textarea", {
-      class: "in", rows: 8, value: a.tools.join("\n"), placeholder: "한 줄에 하나씩",
+      class: "in", rows: 8, value: a.tools.join("\n"), placeholder: "One per line",
       oninput: (e) => { a.tools = e.target.value.split("\n").map((s) => s.trim()).filter(Boolean); S.onChange(); },
     });
-    root.append(card("툴", fieldRow("사용 툴 (모든 언어 공통)", tools, "한 줄에 하나씩")));
+    root.append(card("Tools", fieldRow("Tools used (shared by all languages)", tools, "One per line")));
 
     const awardsBox = h("div", { class: "awards" });
     const renderAwards = () => {
@@ -527,25 +527,25 @@
         const mv = (d) => { const j = i + d; if (j < 0 || j >= a.awards.length) return; [a.awards[i], a.awards[j]] = [a.awards[j], a.awards[i]]; S.onChange(); renderAwards(); };
         awardsBox.append(
           h("div", { class: "award-row" },
-            textInput(aw, "year", { placeholder: "연도" }),
-            textInput(aw, "title", { placeholder: "수상명" }),
-            textInput(aw, "note", { placeholder: "예: Winner · MUSINSA" }),
+            textInput(aw, "year", { placeholder: "Year" }),
+            textInput(aw, "title", { placeholder: "Award title" }),
+            textInput(aw, "note", { placeholder: "e.g. Winner · MUSINSA" }),
             h("div", { class: "g-btns inline" },
-              h("button", { type: "button", class: "ic", text: "↑", title: "위로", onclick: () => mv(-1) }),
-              h("button", { type: "button", class: "ic", text: "↓", title: "아래로", onclick: () => mv(1) }),
-              h("button", { type: "button", class: "ic danger", text: "✕", title: "삭제", onclick: () => { a.awards.splice(i, 1); S.onChange(); renderAwards(); } })
+              h("button", { type: "button", class: "ic", text: "↑", title: "Move up", onclick: () => mv(-1) }),
+              h("button", { type: "button", class: "ic", text: "↓", title: "Move down", onclick: () => mv(1) }),
+              h("button", { type: "button", class: "ic danger", text: "✕", title: "Delete", onclick: () => { a.awards.splice(i, 1); S.onChange(); renderAwards(); } })
             )
           )
         );
       });
-      awardsBox.append(h("button", { type: "button", class: "btn", text: "＋ 수상 내역 추가", onclick: () => { a.awards.push({ year: "", title: "", note: "" }); S.onChange(); renderAwards(); } }));
+      awardsBox.append(h("button", { type: "button", class: "btn", text: "＋ Add award", onclick: () => { a.awards.push({ year: "", title: "", note: "" }); S.onChange(); renderAwards(); } }));
     };
     renderAwards();
-    root.append(card("수상 내역 (모든 언어 공통)", awardsBox));
+    root.append(card("Awards (shared by all languages)", awardsBox));
     return root;
   };
 
-  /* 새 작업 기본값 */
+  /* New work defaults */
   A.newWork = function (id) {
     return toEdit({
       id, year: String(new Date().getFullYear()), url: `works/project-${id}.html`,

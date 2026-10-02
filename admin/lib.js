@@ -1,12 +1,12 @@
 /* =========================================================
    admin/lib.js
-   관리자 페이지 공용 도구: DOM 헬퍼, 비밀번호 금고(암호화),
-   GitHub API 클라이언트, 이미지 처리, 경로 유틸.
+   Shared tools: DOM helper, password vault (encryption),
+   GitHub API client, image processing, path utils.
    ========================================================= */
 "use strict";
 window.Admin = window.Admin || {};
 (function (A) {
-  /* ---------- DOM 헬퍼 (innerHTML 대신 사용 → XSS 방지) ---------- */
+  /* ---------- DOM helper (used instead of innerHTML to avoid XSS) ---------- */
   A.h = function h(tag, attrs, ...kids) {
     const el = document.createElement(tag);
     if (attrs) {
@@ -30,6 +30,25 @@ window.Admin = window.Admin || {};
 
   A.$ = (sel, root) => (root || document).querySelector(sel);
 
+  /* Small warning-icon note, used for every hint line. tag: "p" (default) or "span". */
+  A.hint = function (text, tag) {
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2.2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.setAttribute("aria-hidden", "true");
+    const tri = document.createElementNS(NS, "path");
+    tri.setAttribute("d", "M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z");
+    const bar = document.createElementNS(NS, "path");
+    bar.setAttribute("d", "M12 9v4M12 17h.01");
+    svg.append(tri, bar);
+    return A.h(tag || "p", { class: "hint warn" + (tag === "span" ? " inline" : "") }, svg, A.h("span", { text }));
+  };
+
   /* ---------- Base64 ---------- */
   A.b64 = {
     fromBytes(bytes) {
@@ -46,9 +65,9 @@ window.Admin = window.Admin || {};
     },
   };
 
-  /* ---------- 비밀번호 금고 ----------
-     GitHub 토큰을 비밀번호로 암호화해 admin/vault.json 에 저장합니다.
-     PBKDF2-SHA256(60만 회) → AES-256-GCM. 비밀번호를 모르면 토큰을 꺼낼 수 없습니다. */
+  /* ---------- Password vault ----------
+     The GitHub token is encrypted with the password and stored in admin/vault.json.
+     PBKDF2-SHA256 (600k iterations) then AES-256-GCM. Without the password the token cannot be recovered. */
   A.vault = {
     ITER: 600000,
     async deriveKey(password, salt, iter) {
@@ -90,9 +109,9 @@ window.Admin = window.Admin || {};
     },
   };
 
-  /* ---------- 경로 유틸 ---------- */
+  /* ---------- Path utils ---------- */
   A.path = {
-    /* 저장소 경로(공백 포함 원문) ↔ 데이터에 쓰는 URL 인코딩 경로 */
+    /* repo path (raw, may contain spaces) <-> URL-encoded path used in data */
     enc: (p) => p.split("/").map(encodeURIComponent).join("/"),
     dec: (p) => p.split("/").map((s) => { try { return decodeURIComponent(s); } catch (e) { return s; } }).join("/"),
     dir: (p) => p.slice(0, p.lastIndexOf("/")),
@@ -101,7 +120,7 @@ window.Admin = window.Admin || {};
     isVideo: (p) => /\.(mp4|webm|mov)$/i.test(p || ""),
   };
 
-  /* ---------- GitHub API 클라이언트 ---------- */
+  /* ---------- GitHub API client ---------- */
   A.GH = class GH {
     constructor(cfg) {
       this.token = cfg.token;
@@ -128,7 +147,7 @@ window.Admin = window.Admin || {};
       if (!res.ok) {
         let msg = "";
         try { msg = (await res.json()).message || ""; } catch (e) { /* ignore */ }
-        const err = new Error(msg || res.statusText || "요청 실패");
+        const err = new Error(msg || res.statusText || "Request failed");
         err.status = res.status;
         throw err;
       }
@@ -138,7 +157,7 @@ window.Admin = window.Admin || {};
 
     getRepo() { return this.json(this.rp("")); }
 
-    /* 브랜치의 최신 파일 내용을 텍스트로 읽습니다. 없으면 null. */
+    /* Read the latest file content on the branch as text. null if missing. */
     async getText(path) {
       try {
         const res = await this.api(
@@ -152,7 +171,7 @@ window.Admin = window.Admin || {};
       }
     }
 
-    /* 브랜치 전체 파일 목록 (경로 Set) */
+    /* Every file path on the branch (Set) */
     async getTreePaths() {
       const ref = await this.json(this.rp("/git/ref/heads/" + this.branch));
       const commit = await this.json(this.rp("/git/commits/" + ref.object.sha));
@@ -160,7 +179,7 @@ window.Admin = window.Admin || {};
       return new Set(tree.tree.filter((t) => t.type === "blob").map((t) => t.path));
     }
 
-    /* 파일 하나를 생성/수정 (금고 저장용) */
+    /* Create/update one file (used for the vault) */
     async putFile(path, text, message) {
       let sha;
       try {
@@ -180,8 +199,8 @@ window.Admin = window.Admin || {};
       });
     }
 
-    /* 여러 파일을 하나의 커밋으로 올립니다.
-       changes: [{ path, content: string | Uint8Array | null(삭제) }] */
+    /* Commit many files at once.
+       changes: [{ path, content: string | Uint8Array | null (delete) }] */
     async commit(message, changes, onProgress) {
       const ref = await this.json(this.rp("/git/ref/heads/" + this.branch));
       const parent = ref.object.sha;
@@ -209,8 +228,8 @@ window.Admin = window.Admin || {};
     }
   };
 
-  /* ---------- 이미지 처리 ----------
-     PNG/JPG 는 선택 시 WebP 로 변환하고 긴 변을 maxSide 이하로 줄입니다. */
+  /* ---------- Image processing ----------
+     PNG/JPG are converted to WebP and the long side is capped at maxSide. */
   A.processImage = async function (file, opts) {
     const webp = opts && opts.webp;
     const maxSide = (opts && opts.maxSide) || 2400;
@@ -239,10 +258,10 @@ window.Admin = window.Admin || {};
   A.fmtSize = (n) => (n > 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB");
   A.stamp = () => Date.now().toString(36);
 
-  /* data/*.js 파일(window.X = {...};)에서 JSON 부분을 꺼냅니다. */
+  /* Extract the JSON part of a data/*.js file (window.X = {...};). */
   A.parseDataFile = function (text, globalName) {
     const i = text.indexOf("window." + globalName);
-    if (i < 0) throw new Error(globalName + " 형식을 찾을 수 없습니다.");
+    if (i < 0) throw new Error("Could not find " + globalName + " in the data file.");
     const eq = text.indexOf("=", i);
     const body = text.slice(eq + 1).trim().replace(/;\s*$/, "");
     return JSON.parse(body);
