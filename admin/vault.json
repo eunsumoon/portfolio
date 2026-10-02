@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "owner": "eunsumoon",
+  "repo": "portfolio",
+  "branch": "main",
+  "kdf": "PBKDF2-SHA256",
+  "iter": 600000,
+  "salt": "SmaoCiilqaeaUN6keAFdog==",
+  "iv": "0gsP9gRZU/5T1U+l",
+  "ct": "pHW9VAvgzAIk4f1IuJoI45uRRwT/FkcepBGyk8doYFI21j+LhnXDfkM1X5KGw5eKlPzJXHGQwZpvYJgZpCjGr7fvI54MLZRoF9VxftvSM98Q9EE4NRWQ7hUM6/8gOXFSI4jeXfXy1JD9TCkdjwtHFDlY8gQkht1XcQ=="
+}
