@@ -813,7 +813,7 @@ window.WORKS_DATA = [
       "images/works/AIRFRIC%20Brand%20Launch/gallery-01.png",
       "images/works/AIRFRIC%20Brand%20Launch/gallery-02.png",
       "images/works/AIRFRIC%20Brand%20Launch/gallery-03.png",
-      "images/works/AIRFRIC%20Brand%20Launch/gallery-04.png",
+      "images/works/AIRFRIC%20Brand%20Launch/gallery-mur4xv8u.webp",
       "images/works/AIRFRIC%20Brand%20Launch/gallery-mur2tcyq.webp",
       "images/works/AIRFRIC%20Brand%20Launch/gallery-06.png",
       "images/works/AIRFRIC%20Brand%20Launch/gallery-07.png"
