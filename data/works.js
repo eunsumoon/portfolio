@@ -184,8 +184,7 @@ window.WORKS_DATA = [
           "ko": "대한항공 항공기 랩핑",
           "en": "Korean Air Aircraft Wrap",
           "ja": "大韓航空機体ラッピング"
-        },
-        "captionLight": true
+        }
       }
     ],
     "titles": {
