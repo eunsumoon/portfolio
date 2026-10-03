@@ -485,7 +485,13 @@ window.WORKS_DATA = [
         "カスタムタイポグラフィ",
         "ポスターデザイン"
       ]
-    }
+    },
+    "disclaimer": {
+      "ko": "",
+      "en": "© Nintendo Co., Ltd.\nThe images and characters of \"Super Mario Bros. Wonder\" used in this product are the copyrighted works of Nintendo Co., Ltd.",
+      "ja": ""
+    },
+    "copyrightNotice": "© Nintendo Co., Ltd."
   },
   {
     "id": "07",
