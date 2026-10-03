@@ -128,8 +128,7 @@ window.WORKS_DATA = [
           "ko": "국내 캠페인",
           "en": "Domestic Campaign",
           "ja": "国内キャンペーン"
-        },
-        "captionLight": true
+        }
       },
       {
         "src": "images/works/World%20EXPO%202030%20Busan,%20Korea/gallery_07.png",
