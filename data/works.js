@@ -980,7 +980,13 @@ window.WORKS_DATA = [
         "印刷物制作",
         "ブランドガイドライン"
       ]
-    }
+    },
+    "disclaimer": {
+      "ko": "",
+      "en": "© AIRFRIC\nThe images and characters of \"Atsude\" used in this product are the copyrighted works of ETPI Inc.",
+      "ja": ""
+    },
+    "copyrightNotice": "© AIRFRIC"
   },
   {
     "id": "14",
