@@ -1019,9 +1019,9 @@ window.WORKS_DATA = [
       "ja": "Synapusyu Diaper Launch"
     },
     "tags": {
-      "ko": "패키지",
-      "en": "Packaging",
-      "ja": "パッケージ"
+      "ko": "브랜딩",
+      "en": "Branding",
+      "ja": "ブランディング"
     },
     "descs": {
       "ko": "TV도쿄의 인기 어린이 프로그램 Synapusyu와의 라이선스 기저귀 컬렉션 협업에 참여하여, 로고와 캐릭터를 포함한 프로그램의 기존 IP를 활용해 부모와 어린이 모두에게 공감을 얻을 수 있는 제품을 만들었습니다.\n\n기저귀 프린트, 리테일 패키지, 배송용 카톤박스를 포함한 패키지 시스템 전체 디자인에 참여했습니다. Synapusyu의 브랜드 가이드라인 안에서 비주얼 언어, 레이아웃, 그래픽 구성을 다듬어, 제품이 프로그램 특유의 발랄한 아이덴티티를 충실히 반영하면서도 제품의 기능적 장점을 명확하게 전달할 수 있도록 했습니다.\n\n디자인 과정 전반에 걸쳐 여러 비주얼 방향을 탐색하고 반복하며, 감성적 매력과 상업적 효과 사이의 균형을 맞추고자 했습니다. 목표는 아이들에게는 친근하고 흥미롭게 다가가면서도 부모들에게는 신뢰와 확신을 주는 디자인을 만들어, Synapusyu의 인지도 높은 IP와 제품의 기술적 특징을 자연스럽게 결합하는 것이었습니다.\n\n제품 출시를 다양한 접점에서 뒷받침하기 위해, 제품 랜딩 페이지, 매장 내 프로모션 디스플레이 보드, 유아용품 박람회 전시 부스 그래픽, 그리고 TV도쿄에서 방영된 TV 광고의 캠페인 에셋까지 함께 디자인하여, 디지털, 리테일, 행사, 광고 전반에 걸쳐 일관된 브랜드 경험을 만드는 데 기여했습니다.",
@@ -1029,9 +1029,9 @@ window.WORKS_DATA = [
       "ja": "TV東京の人気子供向け番組Synapusyuとのライセンスおむつコレクションのコラボレーションに携わり、ロゴやキャラクターを含む番組既存のIPを活用して、保護者と子供の双方の共感を得られる製品を作り上げました。\n\nおむつのプリント、店頭パッケージ、出荷用カートンを含むパッケージシステム全体のデザインに携わりました。Synapusyuのブランドガイドラインに沿って、ビジュアル言語、レイアウト、グラフィック構成を磨き上げ、製品が番組ならではの遊び心あるアイデンティティを忠実に反映しながらも、製品の機能的な利点を明確に伝えられるようにしました。\n\nデザインプロセス全体を通して、複数のビジュアル方向性を検討・反復し、感情的な魅力と商業的な効果のバランスを取ることを目指しました。目標は、子供たちにとって親しみやすく魅力的でありながら、保護者には信頼と安心感を与えるデザインを生み出し、Synapusyuの認知度の高いIPと製品の技術的特徴をシームレスに統合することでした。\n\n複数の接点にわたる製品ローンチを支えるため、製品のランディングページ、店頭プロモーション用ディスプレイボード、ベビー用品展示会向けのブース展示グラフィック、そしてTV東京で放映されたテレビCMのキャンペーンアセットもデザインし、デジタル、小売、イベント、広告全体にわたって一貫したブランド体験の実現に貢献しました。"
     },
     "role": {
-      "ko": "패키지 디자이너",
-      "en": "Packaging Designer",
-      "ja": "パッケージデザイナー"
+      "ko": "사내 브랜드 디자이너",
+      "en": "In-house Brand Designer",
+      "ja": "社内ブランドデザイナー"
     },
     "client": {
       "ko": "주식회사ETPI",
@@ -1074,7 +1074,7 @@ window.WORKS_DATA = [
     "copyrightNotice": "© TV TOKYO",
     "secondary": {
       "year": "2026",
-      "image": "",
+      "image": "images/works/Synapusyu%20Diaper%20Launch/thumb-muuzf86a.webp",
       "hero": "images/works/Synapusyu%20Diaper%20Launch/hero-muuyynbg.webp",
       "gallery": [],
       "titles": {
@@ -1083,29 +1083,52 @@ window.WORKS_DATA = [
         "ja": "Synapusyu Baby Wipes Launch"
       },
       "tags": {
-        "ko": "",
+        "ko": "브랜딩",
         "en": "Branding",
-        "ja": ""
+        "ja": "ブランディング"
       },
       "descs": {
-        "ko": "",
-        "en": "",
-        "ja": ""
+        "ko": "Synapusyu 라이선스 기저귀 컬렉션의 성공적인 런칭과 코스트코, 요도바시카메라, 파파스, 웰시아 등 일본 주요 유통 채널로의 확장에 이어, Atsude는 TV도쿄의 인기 어린이 프로그램 Synapusyu와의 협업을 새로운 아기용 물티슈 컬렉션으로 확장했습니다.\n\n새로운 제품의 패키지 디자인에 참여하여, 기존 기저귀 컬렉션에서 구축된 비주얼 언어를 새로운 제품 카테고리에 맞게 발전시키면서 두 제품군 간의 일관된 브랜드 경험을 유지했습니다. Atsude의 제품 아이덴티티와 Synapusyu의 인지도 높은 IP를 결합해, 기존 컬렉션과의 연속성을 유지하면서도 새로운 제품으로서의 개성을 갖도록 디자인했습니다.\n\n패키지 디자인을 넘어, 제품 자체를 소비자 참여의 접점으로 활용하는 상시 프로모션 캠페인의 아이디어 구상과 개발에도 참여했습니다. 제품 뚜껑에 부착된 스티커를 이벤트 참여의 진입점으로 활용하여 한정 굿즈를 받을 수 있도록 하는 프로모션 구조를 기획했으며, 캠페인의 콘셉트와 비주얼 방향을 구체화하고 공식 랜딩 페이지와 참여 메커니즘을 디자인했습니다.\n\n이번 프로젝트는 라이선스 제품을 일회성 상품에 그치지 않고 지속적인 소비자 참여로 확장하며, 실물 패키지와 프로모션, 디지털 경험을 하나의 흐름으로 연결했습니다. 이를 통해 Synapusyu IP와 Atsude의 확장되는 아기용품 라인 사이의 연결성을 강화하고, 제품을 넘어 지속적으로 소비자와 소통할 수 있는 일관된 브랜드 경험을 구축했습니다.",
+        "en": "Following the successful launch of the Synapusyu licensed diaper collection and its expansion into major Japanese retailers including Costco, Yodobashi Camera, PAPA’S, and Welcia, Atsude extended the collaboration into a new baby wipes collection featuring TV Tokyo’s popular children’s program, Synapusyu.\n\nI participated in the packaging design for the new product, adapting the established visual language of the diaper collection to a new product category while maintaining a cohesive connection between the two product lines. The design brought together Atsude’s product identity and Synapusyu’s recognizable IP to create a product that felt both familiar and distinct within the expanding collection.\n\nBeyond the packaging, I contributed to the ideation of an ongoing promotional campaign that turned the product itself into a point of engagement. Using the sticker on the product lid as an entry point, the campaign offered consumers the opportunity to receive exclusive merchandise through a recurring promotional mechanism. I developed the campaign concept and visual direction, and designed the official landing page and participation flow that communicated the mechanism clearly and guided users through the campaign experience.\n\nBy extending the collaboration from a licensed product into an ongoing consumer engagement platform, the project connected physical packaging with promotional and digital touchpoints. The result was a cohesive brand experience that strengthened the relationship between the Synapusyu IP and Atsude’s growing baby-care product line.",
+        "ja": "Synapusyuのライセンスおむつコレクションの成功と、コストコ、ヨドバシカメラ、パパス、ウエルシアなど日本の主要な販売チャネルへの展開を受け、AtsudeはTV東京の人気子ども向け番組「シナぷしゅ」とのコラボレーションを、新たなベビーウェットティッシュのコレクションへと拡張しました。\n\n新商品のパッケージデザインを担当し、既存のおむつコレクションで構築したビジュアルランゲージを新たな商品カテゴリーに合わせて発展させながら、両製品間で一貫したブランド体験を維持しました。Atsudeの商品アイデンティティとシナぷしゅの認知度の高いIPを組み合わせ、既存コレクションとの連続性を保ちながらも、新たな商品としての独自性を感じられるデザインを目指しました。\n\nまた、パッケージデザインにとどまらず、商品そのものを消費者との接点として活用する継続型プロモーションキャンペーンのアイデア開発にも携わりました。商品のフタに使用されているステッカーをキャンペーン参加の入り口として活用し、限定グッズが当たる仕組みを企画。キャンペーンのコンセプトおよびビジュアルディレクションの策定から、公式ランディングページ、参加フローの設計・デザインまで一貫して担当しました。\n\n本プロジェクトでは、ライセンス商品を単発の商品展開にとどめず、継続的な消費者とのエンゲージメントへと発展させました。パッケージ、プロモーション、デジタル体験を一つの流れとしてつなぐことで、シナぷしゅのIPとAtsudeの拡大するベビーケア商品ラインとのつながりを強化し、商品を起点とした継続的なブランド体験の構築に貢献しました。"
       },
       "role": {
-        "ko": "",
-        "en": "",
-        "ja": ""
+        "ko": "사내 브랜드 디자이너",
+        "en": "In-house Brand Designer",
+        "ja": "社内ブランドデザイナー"
+      },
+      "client": {
+        "ko": "주식회사ETPI",
+        "en": "ETPI Inc.",
+        "ja": "株式会社ETPI"
       },
       "contribution": {
-        "ko": "",
-        "en": "",
-        "ja": ""
+        "ko": "50% (팀 2인)",
+        "en": "50% (Team of 2)",
+        "ja": "50%(2人チーム)"
       },
       "responsibilities": {
-        "ko": [],
-        "en": [],
-        "ja": []
+        "ko": [
+          "패키지 디자인",
+          "랜딩 페이지 디자인",
+          "리테일 디스플레이 디자인",
+          "캠페인 디자인",
+          "UI/UX"
+        ],
+        "en": [
+          "Packaging Design",
+          "Landing Page Design",
+          "Retail Display Design",
+          "Campaign Design",
+          "UI/UX"
+        ],
+        "ja": [
+          "パッケージデザイン",
+          "ランディングページデザイン",
+          "リテールディスプレイデザイン",
+          "キャンペーンデザイン",
+          "UI/UX"
+        ]
       }
     }
   },
