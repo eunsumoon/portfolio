@@ -478,13 +478,13 @@ function renderWorkDetail() {
   const existingDisclaimer = document.getElementById("wdDisclaimer");
   if (existingDisclaimer) existingDisclaimer.remove();
   if (item.disclaimer) {
-    const navEl = document.querySelector(".work-detail-nav");
+    const navEl = document.getElementById("wdGallery");
     if (navEl) {
       const p = document.createElement("p");
       p.id = "wdDisclaimer";
       p.className = "work-disclaimer";
       p.textContent = item.disclaimer[currentLang];
-      navEl.insertAdjacentElement("beforebegin", p);
+      navEl.insertAdjacentElement("afterend", p);
     }
   }
 }
