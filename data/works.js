@@ -1078,7 +1078,7 @@ window.WORKS_DATA = [
       "hero": "images/works/Synapusyu%20Diaper%20Launch/hero-muuyynbg.webp",
       "gallery": [
         "images/works/Synapusyu%20Diaper%20Launch/gallery-muuzru5n.webp",
-        "images/works/Synapusyu%20Diaper%20Launch/gallery-muuzrqnc.webp",
+        "images/works/Synapusyu%20Diaper%20Launch/gallery-muuzxv1u.webp",
         "images/works/Synapusyu%20Diaper%20Launch/gallery-muuzpwn0.webp"
       ],
       "titles": {
