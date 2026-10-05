@@ -1076,7 +1076,11 @@ window.WORKS_DATA = [
       "year": "2026",
       "image": "images/works/Synapusyu%20Diaper%20Launch/thumb-muuzf86a.webp",
       "hero": "images/works/Synapusyu%20Diaper%20Launch/hero-muuyynbg.webp",
-      "gallery": [],
+      "gallery": [
+        "images/works/Synapusyu%20Diaper%20Launch/gallery-muuzru5n.webp",
+        "images/works/Synapusyu%20Diaper%20Launch/gallery-muuzrqnc.webp",
+        "images/works/Synapusyu%20Diaper%20Launch/gallery-muuzpwn0.webp"
+      ],
       "titles": {
         "ko": "Synapusyu Baby Wipes Launch",
         "en": "Synapusyu Baby Wipes Launch",
