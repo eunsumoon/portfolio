@@ -901,6 +901,7 @@ section {
   margin-bottom: 56px;
 }
 .work-detail-secondary .work-gallery { margin-bottom: 0; }
+.work-detail-secondary:has(.work-disclaimer) { margin-bottom: 0; }
 
 .work-detail-nav {
   display: flex;
