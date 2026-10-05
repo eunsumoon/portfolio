@@ -975,7 +975,7 @@ window.WORKS_DATA = [
     },
     "disclaimer": {
       "ko": "",
-      "en": "© AIRFRIC\nThe images and characters of \"Atsude\" used in this product are the copyrighted works of ETPI Inc.",
+      "en": "© AIRFRIC\nThe images and characters of \"Atsude\" used in this product are the copyrighted works of AIRFRIC.",
       "ja": ""
     },
     "copyrightNotice": "© AIRFRIC"
