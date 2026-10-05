@@ -1214,9 +1214,9 @@ window.WORKS_DATA = [
       ]
     },
     "disclaimer": {
-      "ko": "",
+      "ko": "© KLARR\n본 제품에 사용된 'KLARR'의 이미지는 주식회사 클라이노베이션의 저작물입니다.",
       "en": "© KLARR\nThe images and characters of \"KLARR\" used in this project are the copyrighted works of Klarr Innovation Inc.",
-      "ja": ""
+      "ja": "© KLARR\n本プロジェクトに使用されている「KLARR」の画像は、Klarr Innovation Inc.の著作物です。"
     },
     "copyrightNotice": "© KLARR"
   },
