@@ -1135,9 +1135,9 @@ window.WORKS_DATA = [
         ]
       },
       "disclaimer": {
-        "ko": "",
+        "ko": "© TV TOKYO\n본 제품에 사용된 'Synapusyu'의 이미지 및 캐릭터는 주식회사 TV도쿄의 저작물입니다.",
         "en": "© TV TOKYO\nThe images and characters of \"Synapusyu\" used in this product are the copyrighted works of TV TOKYO Corporation.",
-        "ja": ""
+        "ja": "© TV TOKYO\n本製品に使用されている「シナぷしゅ」の画像およびキャラクターは、株式会社テレビ東京の著作物です。"
       },
       "copyrightNotice": "© TV TOKYO"
     }
