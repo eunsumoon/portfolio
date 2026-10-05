@@ -612,9 +612,9 @@ window.WORKS_DATA = [
       ]
     },
     "disclaimer": {
-      "ko": "",
-      "en": "© CLO\nThe images and characters of \"CLO\" used in this project are the copyrighted works of CLO Virtual Fashion Inc.",
-      "ja": ""
+      "ko": "© CLO\n본 프로젝트에 사용된 'CLO'의 이미지는 Clo Virtual Fashion Inc.의 저작물입니다.",
+      "en": "© CLO\nThe images of \"CLO\" used in this project are the copyrighted works of CLO Virtual Fashion Inc.",
+      "ja": "© CLO\n本プロジェクトに使用されている「CLO」の画像は、Clo Virtual Fashion Inc.の著作物です。"
     },
     "copyrightNotice": "© CLO"
   },
