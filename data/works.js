@@ -547,9 +547,9 @@ window.WORKS_DATA = [
       ]
     },
     "disclaimer": {
-      "ko": "",
-      "en": "© SPOTIFY\nThe images and characters of \"Spotify\" used in this project are the copyrighted works of Spotify USA Inc.",
-      "ja": ""
+      "ko": "© SPOTIFY\n본 프로젝트에 사용된 'Spotify'의 이미지는 Spotify USA Inc.의 저작물입니다.",
+      "en": "© SPOTIFY\nThe images of \"Spotify\" used in this project are the copyrighted works of Spotify USA Inc.",
+      "ja": "本プロジェクトに使用されている「Spotify」の画像は、Spotify USA Inc.の著作物です。"
     },
     "copyrightNotice": "© SPOTIFY"
   },
