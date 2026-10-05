@@ -610,7 +610,13 @@ window.WORKS_DATA = [
         "キービジュアルデザイン",
         "タイポグラフィ"
       ]
-    }
+    },
+    "disclaimer": {
+      "ko": "",
+      "en": "© CLO\nThe images and characters of \"CLO\" used in this project are the copyrighted works of CLO Virtual Fashion Inc.",
+      "ja": ""
+    },
+    "copyrightNotice": "© CLO"
   },
   {
     "id": "09",
