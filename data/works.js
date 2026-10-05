@@ -1143,7 +1143,13 @@ window.WORKS_DATA = [
         "ビジュアルアイデンティティ",
         "UI/UX"
       ]
-    }
+    },
+    "disclaimer": {
+      "ko": "",
+      "en": "© KLARR\nThe images and characters of \"KLARR\" used in this project are the copyrighted works of Klarr Innovation Inc.",
+      "ja": ""
+    },
+    "copyrightNotice": "© KLARR"
   },
   {
     "id": "16",
