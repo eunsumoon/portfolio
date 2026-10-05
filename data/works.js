@@ -992,9 +992,9 @@ window.WORKS_DATA = [
       ]
     },
     "disclaimer": {
-      "ko": "",
+      "ko": "© AIRFRIC\n본 제품에 사용된 'Atsude'의 이미지는 AIRFRIC의 저작물입니다.",
       "en": "© AIRFRIC\nThe images and characters of \"Atsude\" used in this product are the copyrighted works of AIRFRIC.",
-      "ja": ""
+      "ja": "© AIRFRIC\n本プロジェクトに使用されている「Atsude」の画像は、AIRFRICの著作物です。"
     },
     "copyrightNotice": "© AIRFRIC"
   },
