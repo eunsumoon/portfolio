@@ -545,7 +545,13 @@ window.WORKS_DATA = [
         "パッケージデザイン",
         "ブースデザイン"
       ]
-    }
+    },
+    "disclaimer": {
+      "ko": "",
+      "en": "© SPOTIFY\nThe images and characters of \"Spotify\" used in this project are the copyrighted works of Spotify USA Inc.",
+      "ja": ""
+    },
+    "copyrightNotice": "© SPOTIFY"
   },
   {
     "id": "08",
