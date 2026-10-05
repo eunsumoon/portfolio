@@ -478,9 +478,9 @@ window.WORKS_DATA = [
       ]
     },
     "disclaimer": {
-      "ko": "© Nintendo Co., Ltd.\n본 제품에 사용된 'Super Mario Bros. Wonder'의 이미지 및 캐릭터는 Nintendo Co., Ltd.의 저작물입니다.",
+      "ko": "© Nintendo Co., Ltd.\n본 프로젝트에 사용된 'Super Mario Bros. Wonder'의 이미지 및 캐릭터는 Nintendo Co., Ltd.의 저작물입니다.",
       "en": "© Nintendo Co., Ltd.\nThe images and characters of \"Super Mario Bros. Wonder\" used in this product are the copyrighted works of Nintendo Co., Ltd.",
-      "ja": "© Nintendo Co., Ltd.\n本製品に使用されている「Super Mario Bros. Wonder」の画像およびキャラクターは、Nintendo Co., Ltd.の著作物です。"
+      "ja": "© Nintendo Co., Ltd.\n本プロジェクトに使用されている「Super Mario Bros. Wonder」の画像およびキャラクターは、Nintendo Co., Ltd.の著作物です。"
     },
     "copyrightNotice": "© Nintendo Co., Ltd."
   },
