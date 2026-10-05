@@ -127,11 +127,11 @@
     if (anyText(w.client)) o.client = cleanI18n(w.client);
     o.contribution = cleanI18n(w.contribution);
     o.responsibilities = cleanLines(w.responsibilities);
+    if (anyText(w.disclaimer)) o.disclaimer = cleanI18n(w.disclaimer);
+    if (w.copyrightNotice && w.copyrightNotice.trim()) o.copyrightNotice = w.copyrightNotice.trim();
     if (!secondary) {
       if (anyText(w.award)) o.award = cleanI18n(w.award);
       if (w.note && anyText(w.note.text)) o.note = { label: cleanI18n(w.note.label), text: cleanI18n(w.note.text) };
-      if (anyText(w.disclaimer)) o.disclaimer = cleanI18n(w.disclaimer);
-      if (w.copyrightNotice && w.copyrightNotice.trim()) o.copyrightNotice = w.copyrightNotice.trim();
       if (w.secondary) o.secondary = serializeWork(w.secondary, true);
     }
     return o;
@@ -470,7 +470,13 @@
       if (!w.secondary) return;
       secWrap.append(h("h3", { class: "sec-title", text: "Secondary work" }));
       basicCards(w.secondary, ctx, true).forEach((c) => secWrap.append(c));
-      secWrap.append(card("Secondary work gallery", galleryField(w.secondary, ctx)));
+      secWrap.append(
+        card("Extra text (optional)",
+          fieldRow("Copyright badge (shown over the image)", textInput(w.secondary, "copyrightNotice", { placeholder: "e.g. © TV TOKYO" })),
+          fieldRow("Footer disclaimer", i18nInput(w.secondary, "disclaimer", { multiline: true, rows: 3 }), "If empty, this item is hidden.")
+        ),
+        card("Secondary work gallery", galleryField(w.secondary, ctx))
+      );
     };
     const secToggle = h("label", { class: "chk" },
       h("input", {

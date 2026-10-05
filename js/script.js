@@ -428,8 +428,9 @@ function renderWorkDetail() {
 
       const heroEl2 = document.getElementById("wdHero2");
       if (heroEl2) {
+        const heroBadge2 = s.copyrightNotice ? `<span class="copyright-badge">${s.copyrightNotice}</span>` : "";
         heroEl2.innerHTML = s.hero
-          ? `<img src="${BASE}${s.hero}" alt="${s.titles[currentLang]}">`
+          ? `<img src="${BASE}${s.hero}" alt="${s.titles[currentLang]}">${heroBadge2}`
           : `<span class="work-thumb-placeholder">IMAGE</span>`;
       }
 
@@ -452,6 +453,16 @@ function renderWorkDetail() {
 
       const slots2 = s.gallery && s.gallery.length ? s.gallery : [];
       renderGallery("wdGallery2", slots2, s.titles[currentLang], s.copyrightNotice);
+
+      const existingDisclaimer2 = document.getElementById("wdDisclaimer2");
+      if (existingDisclaimer2) existingDisclaimer2.remove();
+      if (s.disclaimer) {
+        const p2 = document.createElement("p");
+        p2.id = "wdDisclaimer2";
+        p2.className = "work-disclaimer";
+        p2.textContent = s.disclaimer[currentLang];
+        secondaryWrap.appendChild(p2);
+      }
     } else {
       secondaryWrap.hidden = true;
     }
