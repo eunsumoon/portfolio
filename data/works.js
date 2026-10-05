@@ -680,9 +680,9 @@ window.WORKS_DATA = [
       ]
     },
     "disclaimer": {
-      "ko": "",
+      "ko": "© BY SEOG BE SEOG\n본 프로젝트에 사용된 이미지는 BY SEOG BE SEOG의 저작물입니다.",
       "en": "© BY SEOG BE SEOG\nThe images used in this project are the copyrighted works of BY SEOG BE SEOG.",
-      "ja": ""
+      "ja": "© BY SEOG BE SEOG\n本プロジェクトに使用されている画像は、BY SEOG BE SEOGの著作物です。"
     },
     "copyrightNotice": "© BY SEOG BE SEOG",
     "award": {
