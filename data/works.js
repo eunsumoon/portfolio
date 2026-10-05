@@ -1711,9 +1711,9 @@ window.WORKS_DATA = [
       ]
     },
     "disclaimer": {
-      "ko": "",
-      "en": "© SunLake\nThe images and characters of \"SunLake\" used in this project are the copyrighted works of SunLake.",
-      "ja": ""
+      "ko": "© SunLake\n본 프로젝트 및 제품에 사용된 'SunLake'의 이미지는 SunLake의 저작물입니다.",
+      "en": "© SunLake\nThe images of \"SunLake\" used in this project and product are the copyrighted works of SunLake.",
+      "ja": "© SunLake\n本プロジェクトおよび製品に使用されている「SunLake」の画像は、SunLakeの著作物です。"
     },
     "copyrightNotice": "© SunLake"
   },
