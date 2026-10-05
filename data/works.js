@@ -671,7 +671,13 @@ window.WORKS_DATA = [
       "ko": "2020 LOTTERIA Graphic Design Competition Finalist",
       "en": "2020 LOTTERIA Graphic Design Competition Finalist",
       "ja": "2020 LOTTERIA Graphic Design Competition Finalist"
-    }
+    },
+    "disclaimer": {
+      "ko": "",
+      "en": "© BY SEOG BE SEOG\nThe images used in this project are the copyrighted works of BY SEOG BE SEOG.",
+      "ja": ""
+    },
+    "copyrightNotice": "© BY SEOG BE SEOG"
   },
   {
     "id": "10",
