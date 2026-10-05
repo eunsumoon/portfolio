@@ -1071,7 +1071,43 @@ window.WORKS_DATA = [
       "en": "© TV TOKYO\nThe images and characters of \"Synapusyu\" used in this product are the copyrighted works of TV TOKYO Corporation.",
       "ja": "© TV TOKYO\n本製品に使用されている「シナぷしゅ」の画像およびキャラクターは、株式会社テレビ東京の著作物です。"
     },
-    "copyrightNotice": "© TV TOKYO"
+    "copyrightNotice": "© TV TOKYO",
+    "secondary": {
+      "year": "2026",
+      "image": "",
+      "hero": "",
+      "gallery": [],
+      "titles": {
+        "ko": "Synapusyu Baby Wipes Launch",
+        "en": "Synapusyu Baby Wipes Launch",
+        "ja": "Synapusyu Baby Wipes Launch"
+      },
+      "tags": {
+        "ko": "",
+        "en": "Branding",
+        "ja": ""
+      },
+      "descs": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "role": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "contribution": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "responsibilities": {
+        "ko": [],
+        "en": [],
+        "ja": []
+      }
+    }
   },
   {
     "id": "15",
