@@ -902,7 +902,7 @@ window.WORKS_DATA = [
     "disclaimer": {
       "ko": "© AIRFRIC\n본 제품에 사용된 'スマートティッシュ'와 'Kinugokochi'의 이미지는 주식회사 ETPI의 저작물입니다.",
       "en": "© AIRFRIC\nThe images of \"スマートティッシュ\" and \"Kinugokochi\" used in this product are the copyrighted works of ETPI Inc.",
-      "ja": "本プロジェクトに使用されている「スマートティッシュ」と「Kinugokochi」の画像は、株式会社ETPIの著作物です。"
+      "ja": "© AIRFRIC\n本プロジェクトに使用されている「スマートティッシュ」と「Kinugokochi」の画像は、株式会社ETPIの著作物です。"
     },
     "copyrightNotice": "© AIRFRIC"
   },
