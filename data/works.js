@@ -1640,7 +1640,13 @@ window.WORKS_DATA = [
         "アルバムカバーデザイン",
         "映像デザイン"
       ]
-    }
+    },
+    "disclaimer": {
+      "ko": "",
+      "en": "© SunLake\nThe images and characters of \"Bagel\" and \"SunLake\" used in this project are the copyrighted works of SunLake.",
+      "ja": ""
+    },
+    "copyrightNotice": "© SunLake"
   },
   {
     "id": "23",
