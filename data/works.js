@@ -1643,7 +1643,7 @@ window.WORKS_DATA = [
     },
     "disclaimer": {
       "ko": "",
-      "en": "© SunLake\nThe images and characters of \"Bagel\" and \"SunLake\" used in this project are the copyrighted works of SunLake.",
+      "en": "© SunLake\nThe images and characters of \"SunLake\" used in this project are the copyrighted works of SunLake.",
       "ja": ""
     },
     "copyrightNotice": "© SunLake"
